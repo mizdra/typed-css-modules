@@ -1,5 +1,5 @@
 {
-  "name": "typed-css-modules",
+  "name": "@mizdra/typed-css-modules",
   "version": "0.7.0",
   "description": "Creates .d.ts files from CSS Modules .css files",
   "main": "lib/index.js",
@@ -29,6 +29,10 @@
     "css-modules",
     "typescript"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "quramy",
   "license": "MIT",
   "engines": {
