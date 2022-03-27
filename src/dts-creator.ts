@@ -12,6 +12,7 @@ interface DtsCreatorOptions {
   camelCase?: CamelCaseOption;
   namedExports?: boolean;
   dropExtension?: boolean;
+  declarationMap?: boolean;
   EOL?: string;
   loaderPlugins?: Plugin<any>[];
 }
@@ -26,6 +27,7 @@ export class DtsCreator {
   private camelCase: CamelCaseOption;
   private namedExports: boolean;
   private dropExtension: boolean;
+  private declarationMap: boolean;
   private EOL: string;
 
   constructor(options?: DtsCreatorOptions) {
@@ -39,6 +41,7 @@ export class DtsCreator {
     this.camelCase = options.camelCase;
     this.namedExports = !!options.namedExports;
     this.dropExtension = !!options.dropExtension;
+    this.declarationMap = !!options.declarationMap;
     this.EOL = options.EOL || os.EOL;
   }
 
@@ -53,18 +56,16 @@ export class DtsCreator {
       this.loader.tokensByFile = {};
     }
 
-    const res = await this.loader.fetch(filePath, '/', undefined, initialContents);
-    if (res) {
-      const tokens = res;
-      const keys = Object.keys(tokens);
-
+    const rawTokenList = await this.loader.fetch(filePath, '/', undefined, initialContents);
+    if (rawTokenList) {
       const content = new DtsContent({
         dropExtension: this.dropExtension,
+        declarationMap: this.declarationMap,
         rootDir: this.rootDir,
         searchDir: this.searchDir,
         outDir: this.outDir,
         rInputPath,
-        rawTokenList: keys,
+        rawTokenList,
         namedExports: this.namedExports,
         camelCase: this.camelCase,
         EOL: this.EOL,
@@ -72,7 +73,7 @@ export class DtsCreator {
 
       return content;
     } else {
-      throw res;
+      throw rawTokenList;
     }
   }
 }
