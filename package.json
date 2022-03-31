@@ -1,6 +1,6 @@
 {
-  "name": "typed-css-modules",
-  "version": "0.7.0",
+  "name": "@mizdra/typed-css-modules",
+  "version": "1.0.0-alpha.1",
   "description": "Creates .d.ts files from CSS Modules .css files",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -29,16 +29,22 @@
     "css-modules",
     "typescript"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "quramy",
   "license": "MIT",
   "engines": {
     "node": ">=12.0.0"
   },
   "dependencies": {
+    "@types/convert-source-map": "^1.5.2",
     "@types/css-modules-loader-core": "^1.1.0",
     "camelcase": "^6.0.0",
     "chalk": "^4.0.0",
     "chokidar": "^3.4.0",
+    "convert-source-map": "^1.8.0",
     "css-modules-loader-core": "^1.1.0",
     "glob": "^7.1.2",
     "is-there": "^4.4.2",
